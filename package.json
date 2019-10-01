@@ -1,0 +1,18 @@
+{
+  "name": "simple-crud",
+  "version": "1.0.0",
+  "description": "perform crud operation in mongodb with expressjs use of angular",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "*",
+    "mongoose": "*",
+    "cors": "*",
+    "body-parser": "*"
+  },
+  "author": "arun",
+  "license": "ISC"
+}
