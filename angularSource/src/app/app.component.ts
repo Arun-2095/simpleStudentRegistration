@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl, NgForm } from '@angular/forms';
+import { DbconnectService } from './dbconnect.service';
+import { Student } from './interface/studentData' ;
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,33 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular';
+  public student = new FormGroup({
+
+    name: new FormControl(''),
+fathername: new FormControl(''),
+age: new FormControl(''),
+dob: new FormControl(''),
+
+address: new FormGroup({
+ street:  new FormControl(''),
+ city:  new FormControl(''),
+ state:  new FormControl(''),
+ pincode:  new FormControl(''),
+})
+
+  });
+
+
+constructor(public dataBase: DbconnectService ) {}
+
+public postData(form: NgForm) {
+ const student: Student = this.student.value;
+
+ this.dataBase.registerStudent(student).subscribe(
+    (res) => console.log(res),
+     (err) => console.log(err));
+
+ form.reset();
+  }
+
 }

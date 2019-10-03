@@ -32,14 +32,15 @@ routers.get('/',(req,res)=>{
 });
 
 routers.post('/register' , (req, res) =>{
+   
     const student1 = new Student({
         name : req.body.name,
        age  : req.body.age,
        address : {
-            street  : req.body.street,
-            city   :  req.body.city,
-            state  : req.body.state,
-            pincode : req.body.pincode
+            street  : req.body.address.street,
+            city   :  req.body.address.city,
+            state  : req.body.address.state,
+            pincode : req.body.address.pincode
        },
        dob :  req.body.dob,
        fathername : req.body.fathername
@@ -47,7 +48,7 @@ routers.post('/register' , (req, res) =>{
        });
 
        student1.save((err,student1)=>{
-        if (err) console.log(err);
+        if (err) return res.send(err);
   
         if (student1) return res.send('data sent');
        }
