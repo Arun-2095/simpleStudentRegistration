@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders , HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders , HttpErrorResponse  } from '@angular/common/http';
 import { Student } from './interface/studentData';
 
 import { Observable, throwError } from 'rxjs';
@@ -8,6 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
+
 export class DbconnectService {
 
   constructor(private http: HttpClient) { }
@@ -27,8 +28,16 @@ public registerStudent(data): Observable<Student> {
   .pipe(
     tap( (student: Student) => console.log('successfully posted' + student)
     ),
-    catchError(this.handleError)
+    catchError(this.handleError),
   );
+}
+
+public allStudents(): Observable<Student> {
+
+   return this.http.get<Student>('http://localhost:5000/student/').pipe(
+   catchError(this.handleError),
+   tap( (student: Student) => console.log('successfully posted' + student)
+    ));
 }
 
 }

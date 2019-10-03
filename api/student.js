@@ -5,6 +5,7 @@ const Mongoose = require('mongoose');
 const Student = require('../model/studentModel');
 
 const routers = Express.Router();
+
 // connecting to database
 
 Mongoose.connect(Database.db , { 
@@ -19,10 +20,10 @@ Mongoose.connection.on('error', err => {
 routers.get('/',(req,res)=>{
     Student.find({}, (err, data )=>{
         if (err) {
-            return handleError(err);
+            res.json(err);
         } 
         if(data) {
-            res.send(userMap); 
+            res.json(data); 
         }
           
        

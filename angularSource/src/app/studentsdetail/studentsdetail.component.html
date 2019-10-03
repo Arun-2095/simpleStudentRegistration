@@ -1,23 +1,24 @@
 
 
-<mat-card>
+<mat-card >
 
 <mat-card-title class="text-center">
     studentsdetail 
 </mat-card-title>
-<mat-card-content>
+<mat-card-content *ngFor="let student of allStudent">
     <mat-accordion>
         <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                 students
+                 {{ student.name }}
                 </mat-panel-title>
                 <mat-panel-description>
-                  Type your name and age
+                  father's Name   &nbsp; <strong> {{student.fathername}} </strong>   
                 </mat-panel-description>
               </mat-expansion-panel-header>
              <p>
-               address 
+               {{student.address.street}} , {{student.address.city}},{{student.address.state}}, Pincode - {{student.address.pincode}}.
+
              </p>
              <button color="accent" class="right" mat-flat-button>update</button>
              <button color="warn" class="right" mat-button>delete</button>
@@ -26,7 +27,8 @@
 
 </mat-card-content>
 <mat-card-footer>
- pagenation will come here
+ 
 </mat-card-footer>
 </mat-card>
+
 
