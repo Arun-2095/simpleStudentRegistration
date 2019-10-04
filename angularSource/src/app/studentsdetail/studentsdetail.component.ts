@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { DbconnectService } from '../dbconnect.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { Student } from '../interface/studentData';
 
 @Component({
   selector: 'app-studentsdetail',
@@ -7,20 +7,11 @@ import { DbconnectService } from '../dbconnect.service';
   styleUrls: ['./studentsdetail.component.css']
 })
 export class StudentsdetailComponent implements OnInit {
-  public allStudent;
 
-  constructor(private dataBase: DbconnectService) { }
+@Input() studentsData: Student ;
+  constructor() { }
 
   ngOnInit() {
-    this.dataBase.allStudents().subscribe(
-      (res) => {
-        console.log(res);
-        this.allStudent = res;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
   }
 
 }

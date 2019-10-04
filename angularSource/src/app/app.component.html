@@ -45,8 +45,12 @@
          <button type="submit" color="primary" mat-raised-button>Submit</button>
       </form>
     </mat-card>
+    <mat-divider></mat-divider>
+    <mat-card>
+                     <h1 class="text-center m-3"> All Student Information</h1>
+        <app-studentsdetail *ngFor="let student of allstudentData"  [studentsData]="student"></app-studentsdetail>
+    </mat-card>
     
-    <app-studentsdetail></app-studentsdetail>
   </div> 
   
   <router-outlet></router-outlet>

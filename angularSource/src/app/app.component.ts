@@ -9,6 +9,8 @@ import { Student } from './interface/studentData' ;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+ public allstudentData ;
+
   public student = new FormGroup({
 
     name: new FormControl(''),
@@ -26,7 +28,19 @@ address: new FormGroup({
   });
 
 
-constructor(public dataBase: DbconnectService ) {}
+constructor(public dataBase: DbconnectService ) {
+
+  this.dataBase.allStudents().subscribe(
+    (res) => {
+      console.log(res);
+      this.allstudentData = res;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+
+}
 
 public postData(form: NgForm) {
  const student: Student = this.student.value;
@@ -34,8 +48,8 @@ public postData(form: NgForm) {
  this.dataBase.registerStudent(student).subscribe(
     (res) => console.log(res),
      (err) => console.log(err));
-
  form.reset();
   }
+
 
 }

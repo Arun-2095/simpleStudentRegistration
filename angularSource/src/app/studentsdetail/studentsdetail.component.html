@@ -1,23 +1,23 @@
 
 
-<mat-card >
+
 
 <mat-card-title class="text-center">
-    studentsdetail 
+ 
 </mat-card-title>
-<mat-card-content *ngFor="let student of allStudent">
+<mat-card-content>
     <mat-accordion>
         <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                 {{ student.name }}
+                  {{ studentsData.name }}
                 </mat-panel-title>
-                <mat-panel-description>
-                  father's Name   &nbsp; <strong> {{student.fathername}} </strong>   
+                 <mat-panel-description>
+                  father's Name   &nbsp; <strong> {{studentsData.fathername}} </strong>   
                 </mat-panel-description>
               </mat-expansion-panel-header>
              <p>
-               {{student.address.street}} , {{student.address.city}},{{student.address.state}}, Pincode - {{student.address.pincode}}.
+               {{studentsData.address.street}} , {{studentsData.address.city}},{{studentsData.address.state}}, Pincode - {{studentsData.address.pincode}}.
 
              </p>
              <button color="accent" class="right" mat-flat-button>update</button>
@@ -29,6 +29,6 @@
 <mat-card-footer>
  
 </mat-card-footer>
-</mat-card>
+
 
 
