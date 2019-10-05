@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, NgForm } from '@angular/forms';
 import { DbconnectService } from './dbconnect.service';
-import { Student } from './interface/studentData' ;
+import { Source , MapedData } from './interface/studentData' ;
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { Student } from './interface/studentData' ;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
- public allstudentData ;
+ public allstudentData: [Array<Source>] = [][];
 
   public student = new FormGroup({
 
@@ -32,8 +32,13 @@ constructor(public dataBase: DbconnectService ) {
 
   this.dataBase.allStudents().subscribe(
     (res) => {
-      console.log(res);
-      this.allstudentData = res;
+         const iteration: number = Math.round(res.length / 4);
+         for (let i = 0; i < iteration; i++) {
+             const temp: Array<Source> = res.splice(0, 4);
+             this.allstudentData[i][0].push(temp);
+      }
+         console.log(this.allstudentData);
+        //  console.log((this.allstudentData as Array<Source>).length);
     },
     (err) => {
       console.log(err);
@@ -43,7 +48,7 @@ constructor(public dataBase: DbconnectService ) {
 }
 
 public postData(form: NgForm) {
- const student: Student = this.student.value;
+ const student: Array<Source> = this.student.value;
 
  this.dataBase.registerStudent(student).subscribe(
     (res) => console.log(res),

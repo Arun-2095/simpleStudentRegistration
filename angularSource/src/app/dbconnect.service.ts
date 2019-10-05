@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders , HttpErrorResponse  } from '@angular/common/http';
-import { Student } from './interface/studentData';
+import { Source} from './interface/studentData';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -19,24 +19,24 @@ private handleError(error: HttpErrorResponse) {
 
 }
 
-public registerStudent(data): Observable<Student> {
+public registerStudent(data): Observable<Source> {
 
   const header = new HttpHeaders();
   header.append('Content-Type' , 'application/json');
 
-  return this.http.post<Student>('http://localhost:5000/student/register', data , {headers: header})
+  return this.http.post<Source>('http://localhost:5000/student/register', data , {headers: header})
   .pipe(
-    tap( (student: Student) => console.log('successfully posted' + student)
+    tap( (student) => console.log('successfully posted' + student)
     ),
     catchError(this.handleError),
   );
 }
 
-public allStudents(): Observable<Student> {
+public allStudents(): Observable<Array<Source>> {
 
-   return this.http.get<Student>('http://localhost:5000/student/').pipe(
+   return this.http.get<Array<Source>>('http://localhost:5000/student/').pipe(
    catchError(this.handleError),
-   tap( (student: Student) => console.log('successfully posted' + student)
+   tap( (student) => console.log('successfully posted' + student)
     ));
 }
 

@@ -1,4 +1,6 @@
- export interface Student {
+
+ export interface Source {
+
 name: string;
 fathername: string;
 age: number;
@@ -10,4 +12,11 @@ address: {
  pincode: number;
 
 };
+
+}
+
+ export interface MapedData {
+
+ [index: number]: Source ;
+
 }
