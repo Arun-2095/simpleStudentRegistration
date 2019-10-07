@@ -14,9 +14,3 @@ address: {
 };
 
 }
-
- export interface MapedData {
-
- [index: number]: Source ;
-
-}

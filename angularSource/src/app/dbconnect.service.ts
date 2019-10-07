@@ -32,9 +32,9 @@ public registerStudent(data): Observable<Source> {
   );
 }
 
-public allStudents(): Observable<Array<Source>> {
+public allStudents(): Observable<Source[]> {
 
-   return this.http.get<Array<Source>>('http://localhost:5000/student/').pipe(
+   return this.http.get<Source[]>('http://localhost:5000/student/').pipe(
    catchError(this.handleError),
    tap( (student) => console.log('successfully posted' + student)
     ));

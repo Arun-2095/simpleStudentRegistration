@@ -2,7 +2,7 @@
 
 
 
-<mat-card-title class="text-center">
+<!-- <mat-card-title class="text-center">
  
 </mat-card-title>
 <mat-card-content>
@@ -28,7 +28,62 @@
 </mat-card-content>
 <mat-card-footer>
  
-</mat-card-footer>
+</mat-card-footer> -->
+
+
+<table mat-table [dataSource]="data" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
 
 
 
+  <!-- Name Column -->
+  <ng-container matColumnDef="Name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+   <!-- father Name -->
+   <ng-container matColumnDef="FatherName">
+    <th mat-header-cell *matHeaderCellDef> FatherName </th>
+    <td mat-cell *matCellDef="let element"> {{element.fathername}}</td>
+  </ng-container>
+
+  <!-- Age Column -->
+  <ng-container matColumnDef="Age">
+    <th mat-header-cell *matHeaderCellDef> Age </th>
+    <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+  </ng-container>
+
+   <!-- DateofBirth Column -->
+   <ng-container matColumnDef="DoB">
+    <th mat-header-cell *matHeaderCellDef> DoB </th>
+    <td mat-cell *matCellDef="let element"> {{element.dob | date:"MM/dd/yy" }} </td>
+  </ng-container>
+
+  <!-- address -->
+  <ng-container matColumnDef="Address">
+    <th mat-header-cell *matHeaderCellDef> Address </th>
+    <td mat-cell *matCellDef="let element"> {{element.address.street}}, {{ element.address.city}} , {{ element.address.state}} - {{ element.address.pincode}}  </td>
+  </ng-container>
+
+  <!-- updates -->
+  <ng-container matColumnDef="Update">
+    <th mat-header-cell *matHeaderCellDef> Edit</th>
+    <td *matCellDef="let row"> 
+        <mat-icon color="primary"  cursor="pointer"  class="mr-3">edit</mat-icon>
+      <mat-icon color="warn" (click)="openDialog()" >delete</mat-icon>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayData sticky: true"  ></tr>
+  <tr mat-row *matRowDef="let row; columns: displayData;"></tr>
+</table>
+<mat-paginator
+             
+              [pageSizeOptions]="pageSizeOptions"
+              [pageSize]="4"
+              
+>
+</mat-paginator>

@@ -8,12 +8,15 @@ import { MaterialModule } from './material/material.module';
 import { StudentsdetailComponent } from './studentsdetail/studentsdetail.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DialogboxComponent } from './studentsdetail/dialogbox/dialogbox.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StudentsdetailComponent
+    StudentsdetailComponent,
+    DialogboxComponent
   ],
+  entryComponents: [DialogboxComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
