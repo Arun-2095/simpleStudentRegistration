@@ -2,7 +2,7 @@
       <mat-card class="mt-5"> 
           <h1 class="text-center"> Student Registration</h1>
           <mat-divider></mat-divider>
-      <form #formRef class="example-form mt-4" [formGroup]="student" (ngSubmit)="postData(formRef)">
+      <form #formRef class="example-form mt-4" [formGroup]="student" (ngSubmit)="submitData(formRef)">
           <mat-form-field>
               <mat-label>StudentName</mat-label>
               <input matInput type="text" formControlName="name">
@@ -42,13 +42,22 @@
                     <input matInput type="number" formControlName="pincode">
                 </mat-form-field>
             </div>
-         <button type="submit" color="primary" mat-raised-button>Submit</button>
+           
+            <div *ngIf="studentId;  else submitbtn">
+         <button  type="submit" class="mr-3"  color="warn" mat-raised-button>Update</button>
+         <button type="button" (click)="resetForm(formRef)" color="primary" mat-stroked-button>Discard</button>
+        </div>
+        <ng-template #submitbtn> 
+        <div>
+            <button type="submit" color="primary" mat-raised-button>Submit</button>
+           </div>
+        </ng-template>
       </form>
     </mat-card>
     <mat-divider></mat-divider>
     <mat-card>
                      <h1 class="text-center m-3"> All Student Information</h1>
-        <app-studentsdetail></app-studentsdetail>
+        <app-studentsdetail (updateForm)="dataFromTable($event)"></app-studentsdetail>
     </mat-card>
     
   </div> 

@@ -72,7 +72,7 @@
   <ng-container matColumnDef="Update">
     <th mat-header-cell *matHeaderCellDef> Edit</th>
     <td *matCellDef="let row"> 
-        <mat-icon color="primary"  cursor="pointer"  class="mr-3">edit</mat-icon>
+        <mat-icon color="primary"  cursor="pointer" (click)="editData(row)" class="mr-3">edit</mat-icon>
       <mat-icon color="warn" (click)="openDialog()" >delete</mat-icon>
     </td>
   </ng-container>

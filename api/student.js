@@ -10,12 +10,14 @@ const routers = Express.Router();
 
 Mongoose.connect(Database.db , { 
     useUnifiedTopology: true,
-    useNewUrlParser: true  }).catch(error => handleError(error));
+    useNewUrlParser: true ,
+    useFindAndModify: true }).catch(error => handleError(error));
 
 Mongoose.connection.on('error', err => {
         logError(err);
 });
 
+// fetching data 
 
 routers.get('/',(req,res)=>{
     Student.find({}, (err, data )=>{
@@ -31,6 +33,9 @@ routers.get('/',(req,res)=>{
     
 
 });
+
+// posting data 
+
 
 routers.post('/register' , (req, res) =>{
    
@@ -56,6 +61,45 @@ routers.post('/register' , (req, res) =>{
        );
 
 
+});
+
+//updating data 
+
+routers.put('/register/:id' , (req, res) =>{
+
+    const updatedStudent = {
+        name : req.body.name,
+       age  : req.body.age,
+       address : {
+            street  : req.body.address.street,
+            city   :  req.body.address.city,
+            state  : req.body.address.state,
+            pincode : req.body.address.pincode
+       },
+       dob :  req.body.dob,
+       fathername : req.body.fathername
+       
+       };
+
+
+    Student.findByIdAndUpdate(
+           req.params.id ,
+           { $set: updatedStudent } ,
+            {
+            new:true
+            },
+            function(err, updateddata){
+                if(err){
+                    res.send('error');
+                }
+                if(updateddata){
+                    res.json(updateddata);
+                }
+
+            }
+
+    );
+    
 });
 
 module.exports = routers;

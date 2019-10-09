@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, Input, AfterViewInit,  EventEmitter , ViewChild } from '@angular/core';
 import { Source } from '../interface/studentData';
 import { MatDialog , MatTableDataSource , MatPaginator , PageEvent } from '@angular/material';
 import { DialogboxComponent } from './dialogbox/dialogbox.component';
 import { DbconnectService } from '../dbconnect.service';
+
 
 @Component({
   selector: 'app-studentsdetail',
@@ -11,7 +12,7 @@ import { DbconnectService } from '../dbconnect.service';
 })
 export class StudentsdetailComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @Output()updateForm = new EventEmitter<Source>();
   public data;
   pageSizeOptions: number[] = [4, 8, 12, 16];
   pageEvent: PageEvent;
@@ -41,8 +42,8 @@ openDialog() {
  dialogRef.afterClosed().subscribe((result) => {console.log(result); });
 }
 
-setPageSizeOptions(setPageSizeOptionsInput: string) {
-  this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+editData(row) {
+this.updateForm.emit(row);
 }
 
 }

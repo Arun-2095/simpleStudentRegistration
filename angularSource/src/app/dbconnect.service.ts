@@ -19,6 +19,8 @@ private handleError(error: HttpErrorResponse) {
 
 }
 
+// posting datum to database
+
 public registerStudent(data): Observable<Source> {
 
   const header = new HttpHeaders();
@@ -32,12 +34,25 @@ public registerStudent(data): Observable<Source> {
   );
 }
 
+// fetching data from database
 public allStudents(): Observable<Source[]> {
 
    return this.http.get<Source[]>('http://localhost:5000/student/').pipe(
    catchError(this.handleError),
    tap( (student) => console.log('successfully posted' + student)
     ));
+}
+
+// updating datum in database
+public updateStudent(data, id): Observable<Source> {
+
+  const header = new HttpHeaders();
+  header.append('Content-Type' , 'application/json');
+
+  return this.http.put<Source>('http://localhost:5000/student/register/' + id, data , {headers: header})
+  .pipe(
+  catchError(this.handleError),
+  );
 }
 
 }
