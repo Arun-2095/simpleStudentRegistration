@@ -1,64 +1,78 @@
  <div class="container pb-5">
-      <mat-card class="mt-5"> 
-          <h1 class="text-center"> Student Registration</h1>
-          <mat-divider></mat-divider>
-      <form #formRef class="example-form mt-4" [formGroup]="student" (ngSubmit)="submitData(formRef)">
-          <mat-form-field>
-              <mat-label>StudentName</mat-label>
-              <input matInput type="text" formControlName="name">
-          </mat-form-field>
-          <mat-form-field>
-              <mat-label>Fathername</mat-label>
-              <input matInput type="text" formControlName="fathername">
-          </mat-form-field>
-          <mat-form-field>
-                <input matInput [matDatepicker]="Datepicker" formControlName="dob">
-                <mat-label>DateOfBirth</mat-label>
-                <mat-datepicker-toggle  [for]="Datepicker" matSuffix></mat-datepicker-toggle>
-                 <mat-datepicker #Datepicker></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field>
-              <mat-label>Age</mat-label>
-              <input matInput type="number" formControlName="age">
-          </mat-form-field>
-        
-         
-           <h4>Address</h4>
-           <div formGroupName="address" >
-           <mat-form-field class="w-100">
-               <mat-label>Street</mat-label>
-               <input matInput type="text" formControlName="street">
-           </mat-form-field>
-           <mat-form-field>
-                <mat-label>city</mat-label>
-                <input matInput type="text" formControlName="city">
-            </mat-form-field>
-            <mat-form-field>
-                  <mat-label>State</mat-label>
-                  <input matInput type="text" formControlName="state">
-              </mat-form-field>
-              <mat-form-field>
-                     <mat-label>Pincode</mat-label>
-                    <input matInput type="number" formControlName="pincode">
-                </mat-form-field>
-            </div>
-           
-            <div *ngIf="studentId;  else submitbtn">
-         <button  type="submit" class="mr-3"  color="warn" mat-raised-button>Update</button>
-         <button type="button" (click)="resetForm(formRef)" color="primary" mat-stroked-button>Discard</button>
-        </div>
-        <ng-template #submitbtn> 
-        <div>
-            <button type="submit" color="primary" mat-raised-button>Submit</button>
-           </div>
-        </ng-template>
-      </form>
-    </mat-card>
+     <div class="row">
+         <div class="col-md-12">
+                <mat-card> 
+                        <h1 class="text-center"> Student Registration</h1>
+                        <mat-divider></mat-divider>
+                    <form #formRef class="example-form mt-4" [formGroup]="student" (ngSubmit)="submitData(formRef)">
+                       
+                        <mat-form-field>
+                            <mat-label>StudentName</mat-label>
+                            <input matInput type="text" formControlName="name">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Fathername</mat-label>
+                            <input matInput type="text" formControlName="fathername">
+                        </mat-form-field>
+                        <mat-form-field>
+                              <input matInput [matDatepicker]="Datepicker" formControlName="dob">
+                              <mat-label>DateOfBirth</mat-label>
+                              <mat-datepicker-toggle  [for]="Datepicker" matSuffix></mat-datepicker-toggle>
+                               <mat-datepicker #Datepicker></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Age</mat-label>
+                            <input matInput type="number" formControlName="age">
+                        </mat-form-field>
+                      
+                       
+                         <h4>Address</h4>
+                         <div formGroupName="address" >
+                         <mat-form-field class="w-100">
+                             <mat-label>Street</mat-label>
+                             <input matInput type="text" formControlName="street">
+                         </mat-form-field>
+                         <mat-form-field>
+                              <mat-label>city</mat-label>
+                              <input matInput type="text" formControlName="city">
+                          </mat-form-field>
+                          <mat-form-field>
+                                <mat-label>State</mat-label>
+                                <input matInput type="text" formControlName="state">
+                            </mat-form-field>
+                            <mat-form-field>
+                                   <mat-label>Pincode</mat-label>
+                                  <input matInput type="number" formControlName="pincode">
+                              </mat-form-field>
+                          </div>
+                         
+                          <div *ngIf="studentId;  else submitbtn">
+                       <button  type="submit" class="mr-3"  color="warn" mat-raised-button>Update</button>
+                       <button type="button" (click)="resetForm(formRef)" color="primary" mat-stroked-button>Discard</button>
+                      </div>
+                      <ng-template #submitbtn> 
+                      <div>
+                          <button type="submit" color="primary" mat-raised-button>Submit</button>
+                         </div>
+                      </ng-template>
+                    </form>
+                  </mat-card>
+
+         </div>
+         <div class="col-md-12">
+                <mat-card>
+    <h1 class="text-center m-3"> All Student Information</h1>
+    <app-studentsdetail
+     (updateFormEvent)="dataFromTable($event)" 
+     (deletedataEvent)="deleteData($event)"
+       #studendChildComponent>
+   </app-studentsdetail>
+       </mat-card>
+         </div>
+     </div>
+     
     <mat-divider></mat-divider>
-    <mat-card>
-                     <h1 class="text-center m-3"> All Student Information</h1>
-        <app-studentsdetail (updateForm)="dataFromTable($event)"></app-studentsdetail>
-    </mat-card>
+    
     
   </div> 
   

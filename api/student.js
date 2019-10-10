@@ -11,7 +11,7 @@ const routers = Express.Router();
 Mongoose.connect(Database.db , { 
     useUnifiedTopology: true,
     useNewUrlParser: true ,
-    useFindAndModify: true }).catch(error => handleError(error));
+    useFindAndModify: false }).catch(error => handleError(error));
 
 Mongoose.connection.on('error', err => {
         logError(err);
@@ -100,6 +100,23 @@ routers.put('/register/:id' , (req, res) =>{
 
     );
     
+});
+
+// deleting datum 
+
+routers.delete('/register/:id', (req,res)=>{
+    Student.findByIdAndRemove({ _id :req.params.id } , (err, deletedvideo )=>{
+        if (err) {
+            res.json({ mgs: err.name});
+        } 
+        if(deletedvideo) {
+            res.json({mgs : "record Deleted"}); 
+        }
+          
+       
+    } )
+    
+
 });
 
 module.exports = routers;

@@ -14,3 +14,7 @@ address: {
 };
 
 }
+
+ export interface Message {
+   mgs: string;
+}

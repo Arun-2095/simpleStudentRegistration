@@ -11,8 +11,11 @@ import { DbconnectService } from '../dbconnect.service';
   styleUrls: ['./studentsdetail.component.css']
 })
 export class StudentsdetailComponent implements OnInit {
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Output()updateForm = new EventEmitter<Source>();
+  @Output()updateFormEvent = new EventEmitter<Source>();
+  @Output()deletedataEvent = new EventEmitter<string>();
+
   public data;
   pageSizeOptions: number[] = [4, 8, 12, 16];
   pageEvent: PageEvent;
@@ -37,13 +40,21 @@ ngOnInit() {
   );
 }
 
-openDialog() {
- const dialogRef = this.dialog.open(DialogboxComponent);
- dialogRef.afterClosed().subscribe((result) => {console.log(result); });
+openDialog(row) {
+ const dialogRef = this.dialog.open(DialogboxComponent , {data : {
+   name: row.name,
+   id : row._id
+ }});
+ dialogRef.afterClosed().subscribe((result) => {
+  if (typeof(result) === 'string') {
+        this.deletedataEvent.emit(result);
+
+  } });
+
 }
 
 editData(row) {
-this.updateForm.emit(row);
+this.updateFormEvent.emit(row);
 }
 
 }
