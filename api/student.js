@@ -56,7 +56,7 @@ routers.post('/register' , (req, res) =>{
        student1.save((err,student1)=>{
         if (err) return res.send(err);
   
-        if (student1) return res.send('data sent');
+        if (student1) return res.json({mgs:"data sent"});
        }
        );
 

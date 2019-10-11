@@ -15,7 +15,7 @@ export class DbconnectService {
 
 private handleError(error: HttpErrorResponse) {
 
- return throwError(error.message);
+ return throwError(error);
 
 }
 
@@ -39,8 +39,7 @@ public allStudents(): Observable<Source[]> {
 
    return this.http.get<Source[]>('http://localhost:5000/student/').pipe(
    catchError(this.handleError),
-   tap( (student) => console.log('successfully fetched' + student)
-    ));
+    );
 }
 
 // updating datum in database
