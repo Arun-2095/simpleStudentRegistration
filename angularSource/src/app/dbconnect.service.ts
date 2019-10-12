@@ -26,7 +26,7 @@ public registerStudent(data): Observable<Source> {
   const header = new HttpHeaders();
   header.append('Content-Type' , 'application/json');
 
-  return this.http.post<Source>('http://localhost:5000/student/register', data , {headers: header})
+  return this.http.post<Source>('/student/register', data , {headers: header})
   .pipe(
     tap( (student) => console.log('successfully posted' + student)
     ),
@@ -37,7 +37,7 @@ public registerStudent(data): Observable<Source> {
 // fetching data from database
 public allStudents(): Observable<Source[]> {
 
-   return this.http.get<Source[]>('http://localhost:5000/student/').pipe(
+   return this.http.get<Source[]>('/student/').pipe(
    catchError(this.handleError),
     );
 }
@@ -48,7 +48,7 @@ public updateStudent(data, id): Observable<Source> {
   const header = new HttpHeaders();
   header.append('Content-Type' , 'application/json');
 
-  return this.http.put<Source>('http://localhost:5000/student/register/' + id, data , {headers: header})
+  return this.http.put<Source>('/student/register/' + id, data , {headers: header})
   .pipe(
   catchError(this.handleError),
   );
@@ -57,7 +57,7 @@ public updateStudent(data, id): Observable<Source> {
 
 public deleteStudent(id: string): Observable<Message> {
 
- return  this.http.delete<Message>('http://localhost:5000/student/register/' + id)
+ return  this.http.delete<Message>('/student/register/' + id)
   .pipe(
       catchError(this.handleError),
   );

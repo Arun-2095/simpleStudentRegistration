@@ -8,9 +8,7 @@ const path = require('path');
 const app = Express();
 const port = process.env.port || 5000 ;
 
-app.listen(5000, ()=>{
-  console.log(`server ready ${port}`);
-});
+
 
 // cross origin resource sharing 
 app.use(Cors());
@@ -20,8 +18,15 @@ app.use(BodyParser.json());
 
 // static file loading
 
-
-
+app.use(Express.static(path.join(__dirname + '/public')));
 
 // API
 app.use('/student', student);
+
+app.get('*',(req,res)=>{
+  res.sendfile(path.join(__dirname,'public/index.html'));
+});
+
+app.listen(5000, ()=>{
+  console.log(`server ready ${port}`);
+});
