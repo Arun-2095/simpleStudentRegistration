@@ -27,6 +27,6 @@ app.get('*',(req,res)=>{
   res.sendfile(path.join(__dirname,'public/index.html'));
 });
 
-app.listen(5000, ()=>{
+app.listen(port, ()=>{
   console.log(`server ready ${port}`);
 });
